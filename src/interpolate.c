@@ -326,22 +326,20 @@ void	make_kernel(double pos, double *kernel, interpenum interptype)
         assert(pos <= 1.0);
 
         if (interptype == INTERP_ALANCZOS3) {
-            const double poly[] = { 4.05822453e-04, 2.06965224e-01,
-                                    -5.91821814e-01, -4.85031782e-02,
-                                    2.18307888e+00, -5.18229245e+00,
-                                    7.28691988e+00, -6.33603795e+00,
-                                    3.18917265e+00, -7.05038531e-01,
-                                    -2.43691246e-03 };
+            const double poly[] = {
+                -4.53269514e-07,   2.09261955e-01,  -5.91159027e-01,  -6.92585257e-02,
+                2.25467967e+00,  -5.34055510e+00,   7.53247913e+00,  -6.60420926e+00,
+                3.38478115e+00,  -7.90705242e-01,   1.46865182e-02 };
             const int Npoly = sizeof(poly)/sizeof(double);
             int i;
             double xp = 1.0;
             double offset = 0.0;
-            printf("Npoly %i\n", Npoly);
+            //printf("Npoly %i\n", Npoly);
             for (i=0; i<Npoly; i++) {
                 offset += xp * poly[i];
                 xp *= pos;
             }
-            printf("Pos %.4f, Offset %.4f\n", pos, offset);
+            //printf("Pos %.4f, Offset %.4f\n", pos, offset);
             pos += offset;
         }
 
