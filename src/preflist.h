@@ -120,7 +120,7 @@ pkeystruct key[] =
   {"RESAMPLE_DIR", P_STRING, prefs.resampdir_name},
   {"RESAMPLE_SUFFIX", P_STRING, prefs.resamp_suffix},
   {"RESAMPLING_TYPE", P_KEYLIST, prefs.resamp_type, 0,0, 0.0,0.0,
-   {"FLAGS", "NEAREST", "BILINEAR", "LANCZOS2", "LANCZOS3", "LANCZOS4", ""},
+   {"FLAGS", "NEAREST", "BILINEAR", "LANCZOS2", "LANCZOS3", "LANCZOS4", "ALANCZOS3", ""},
    1, INTERP_MAXDIM, &prefs.nresamp_type},
   {"RESCALE_WEIGHTS", P_BOOLLIST, prefs.wscale_flag, 0,0, 0.0,0.0,
    {""}, 1, MAXINFIELD, &prefs.nwscale_flag},

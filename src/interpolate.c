@@ -38,6 +38,7 @@
 #endif
 #include	<stdio.h>
 #include	<stdlib.h>
+#include        <assert.h>
 
 #include	"define.h"
 #include	"types.h"
@@ -47,7 +48,7 @@
 
 static void	make_kernel(double pos, double *kernel, interpenum interptype);
 
-int		interp_kernwidth[6]={1,1,2,4,6,8};
+int		interp_kernwidth[7]={1,1,2,4,6,8,6};
 
 /****** interpolate_pix *******************************************************
 PROTO	int interpolate_pix(fieldstruct *field, fieldstruct *wfield,
@@ -319,9 +320,32 @@ void	make_kernel(double pos, double *kernel, interpenum interptype)
       *kernel *= val;
       }
     }
-  else if (interptype == INTERP_LANCZOS3)
+  else if ((interptype == INTERP_LANCZOS3) || (interptype == INTERP_ALANCZOS3))
     {
-    if (pos<1e-5 && pos>-1e-5)
+        assert(pos >= 0.0);
+        assert(pos <= 1.0);
+
+        if (interptype == INTERP_ALANCZOS3) {
+            const double poly[] = { 4.05822453e-04, 2.06965224e-01,
+                                    -5.91821814e-01, -4.85031782e-02,
+                                    2.18307888e+00, -5.18229245e+00,
+                                    7.28691988e+00, -6.33603795e+00,
+                                    3.18917265e+00, -7.05038531e-01,
+                                    -2.43691246e-03 };
+            const int Npoly = sizeof(poly)/sizeof(double);
+            int i;
+            double xp = 1.0;
+            double offset = 0.0;
+            printf("Npoly %i\n", Npoly);
+            for (i=0; i<Npoly; i++) {
+                offset += xp * poly[i];
+                xp *= pos;
+            }
+            printf("Pos %.4f, Offset %.4f\n", pos, offset);
+            pos += offset;
+        }
+
+        if (pos<1e-5 && pos>-1e-5)
       {
       *(kernel++) = 0.0;
       *(kernel++) = 0.0;

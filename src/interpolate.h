@@ -41,7 +41,8 @@
 
 /*--------------------------------- typedefs --------------------------------*/
 typedef enum {INTERP_FLAGS, INTERP_NEARESTNEIGHBOUR, INTERP_BILINEAR,
-		INTERP_LANCZOS2, INTERP_LANCZOS3, INTERP_LANCZOS4}
+              INTERP_LANCZOS2, INTERP_LANCZOS3, INTERP_LANCZOS4,
+              INTERP_ALANCZOS3 }
 			interpenum;
 
 /*-------------------------- structure definitions --------------------------*/
